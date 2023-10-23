@@ -82,6 +82,8 @@ void main(){
     arreglo_dinamico[2] = 3;
     // Cuidado con el acceso a arreglos dinamicos, si se intenta acceder a un elemento que no existe, el sistema operativo mata el programa
     // *(arreglo_dinamico + 3) = 1; // El sistema operativo solo nos dio un bloque de 3 posiciones de memoria, por lo tanto, solo podemos acceder a las posiciones 0, 1 y 2
+    // Siguiendo el principio de arreglos dinamicos, cuando es variable de tipo de puntero especifica un arreglo unidimensional, cuando es puntero de puntero especifica
+    // un arreglo bidimensional (matriz), cuando es puntero de puntero de puntero especifica un arreglo tridimensional (representado como un cubo) y asi sucesivamente
 }
 
 // Los stack frames son una manera de organizar la memoria de la region stack, cada vez que se llama a una función, se crea un stack frame
