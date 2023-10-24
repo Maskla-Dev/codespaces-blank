@@ -9,6 +9,7 @@ add_executable(ListasIndexadas busqueda_indexada.c)
 add_executable(VerdaderoFalso verdadero_y_falso.c)
 add_executable(MultiplicacionMatrices multiplicacion_matrices.c)
 add_executable(Contextos stack_frames.c)
+add_executable(Listas listas.c)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
