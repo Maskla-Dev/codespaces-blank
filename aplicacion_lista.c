@@ -13,6 +13,9 @@ typedef struct nodo{
 }NODO;
 
 void agregarProducto(NODO** lista, char* nombre, float precio, int cantidad);
+void eliminarProducto(NODO** lista, char* nombre);
+void mostrarListaProductos(NODO** lista);
+void imprimirProducto(NODO* producto);
 
 void main(){
     int opcion = 0;
@@ -44,37 +47,79 @@ void main(){
                 printf("Nombre del producto: ");
                 char* nombre = malloc(sizeof(char)*20);
                 scanf("%s", nombre);
-
+                eliminarProducto(&lista, nombre);
                 break;
             // Mostrar lista
             case 3:
+                printf("Lista de productos...\n");
+                mostrarProductos(&lista);
                 break;
             default:
+                printf("Opcion no valida...\n");
                 break;
         }
     }while(opcion != 4);
     printf("Adios\n");
 }
 
+void mostrarListaProductos(NODO** lista){
+    NODO* aux = *lista;
+    if(aux == NULL){
+        printf("No hay productos que mostrar\n");
+        return;
+    }
+    if(aux->siguiente == NULL){
+        imprimirProducto(aux);
+        return;
+    }
+    while(aux->siguiente != NULL){
+        imprimirProducto(aux);
+        aux = aux->siguiente;
+    }
+}
+
+void imprimirProducto(NODO* producto){
+    printf("Nombre: %s\tPrecio: %0.2f\tCantidad: %d\n", producto->nombre, producto->precio, producto->cantidad);
+}
+
 void eliminarProducto(NODO** lista, char* nombre){
     NODO* aux = *lista;
+    NODO* aux1 = NULL;
     //Primer caso lista vacia
     if(aux == NULL){
         return;
     }
     // Segundo caso, lista con un solo elemento
     if(strcmp(aux->nombre, nombre) == 0){
-        *lista = NULL;
-        free(aux);
+        if(aux->siguiente == NULL){
+            *lista = NULL;
+            free(aux);
+            aux = NULL;
+        }
+        else{
+            *list = aux->siguiente;
+            free(aux);
+            aux = NULL;
+        }
     }else{
+        aux1=aux;
+        aux=aux->siguiuente;
+
         while(aux->siguiente != NULL){
-            if(aux->siguiente->nombre == nombre){
-                NODO* aux2 = aux->siguiente;
-                aux->siguiente = aux->siguiente->siguiente;
-                free(aux2);
-                return;
+            if(strcmp(aux->nombre, nombre) == 0){
+                break;
             }
             aux = aux->siguiente;
+            aux1 = aux1->siguiente;
+        }
+        if(aux->siguiente == NULL){
+            aux1->siguiente = NULL;
+            free(aux);
+            aux = NULL;
+        }else{
+            aux1->siguiente = aux->siguiente;
+            free(aux);
+            aux = NULL;
         }
     }
 }
