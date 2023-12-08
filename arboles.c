@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#incldue <stdbool.h>
+#include <stdbool.h>
 
 typedef struct{
     char *nombre;
@@ -29,13 +29,15 @@ Arbol *crearArbol(size_t numero_hijos);
 NodoArbol *crearNodo(int valor, size_t numero_hijos);
 bool agregarAlArbol(Arbol* arbol, int valor, int *objetivo);
 NodoArbol *buscar(NodoArbol* nodo, int valor, size_t n);
+bool *modificar(NodoArbol* nodo, int objetivo, int insertar, size_t n);
+bool eliminarNodos(NodoArbol* nodo, int valor, size_t n);
+void eliminarNodo(NodoArbol* nodo, size_t n);
 bool insertarEn(NodoArbol *padre, NodoArbol* hijo, size_t n);
 //int *arreglo;
 //arreglo[0];
 
 void main(){
-    struct Nodo primernodo, segundonodo;
-    primernodo->nodo = &segundonodo;
+    
 }
 
 NodoArbol *crearNodo(int valor, size_t numero_hijos){
@@ -105,6 +107,17 @@ NodoArbol *buscar(NodoArbol* nodo, int valor, size_t n){
     return NULL;
 }
 
+NodoArbol *imprimirArbol(NodoArbol* nodo, size_t n){
+    if(nodo != NULL){
+        printf("%d\t", nodo->valor);
+        for(size_t i = 0; i < n; ++i){
+            if(nodo->nodos_hijos[i] != NULL){
+                imprimirArbol(nodo->nodos_hijos[i], n);
+            }
+        }
+    }
+}
+
 bool insertarEn(NodoArbol *padre, NodoArbol* hijo, size_t n){
     if(padre != NULL && hijo != NULL){
         for(int i = 0; i < n; ++i){
@@ -113,6 +126,33 @@ bool insertarEn(NodoArbol *padre, NodoArbol* hijo, size_t n){
                 return TRUE;
             }
         }
+    }
+    return FALSE;
+}
+
+bool eliminarNodos(NodoArbol *nodo, int valor. size_t n){
+    NodoArbol* nodo_eliminar = buscar(nodo. valor, n);
+    if(nodo_eliminar != NULL){
+        eliminarNodo(nodo, n);
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void eliminarNodo(NodoArbol* nodo, size_t n){
+    for(int i = 0; i < n; ++n){
+        if(nodo->nodos_hijos[i] != NULL){
+            eliminarNodo(nodo->nodos_hijos[i], n);
+        }
+    }
+    free(nodo);
+}
+
+bool *modificar(NodoArbol* nodo, int objetivo, int insertar, size_t n){
+    NodoArbol *a_buscar = buscar(nodo, objetivo, n);
+    if(a_buscar != NULL){
+        a_buscar->valor = insertar;
+        return TRUE;
     }
     return FALSE;
 }
